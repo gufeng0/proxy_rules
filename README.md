@@ -2,13 +2,13 @@
 
 收集和整理 **Loon、Surge、Quantumult X、Shadowrocket、Egern** 的配置与去广告规则。
 
-本项目从 `wool_scripts` 精简整理而来，不限定单一应用，按客户端分别维护。Shadowrocket 沿用原来的 `module/blockAds.srmodule` 去广告合集形式，当前仅保留彩云天气安全去广告规则，后续按需补充，不自动同步上游全集。
+本项目从 `wool_scripts` 精简整理而来，不限定单一应用，按客户端分别维护。Shadowrocket 沿用原来的 `module/blockAds.srmodule` 去广告合集形式，当前包含彩云天气和中国移动规则，后续按需补充，不自动同步上游全集。
 
 ## 当前客户端
 
 | 客户端 | 目录与说明 | 当前内容 |
 | --- | --- | --- |
-| Shadowrocket | [Shadowrocket](./Shadowrocket/readme.md) | 去广告合集（当前包含彩云天气） |
+| Shadowrocket | [Shadowrocket](./Shadowrocket/readme.md) | 去广告合集（彩云天气、中国移动） |
 
 目前只维护 `Shadowrocket/` 独立目录。Loon、Surge、Quantumult X、Egern 属于后续收集范围，有实际内容时再创建对应目录。不同客户端的配置语法与能力不同，不应直接混用。
 
@@ -17,17 +17,18 @@
 | 应用 / 用途 | 客户端 | 文件 | 功能与限制 |
 | --- | --- | --- | --- |
 | 彩云天气去广告 | Shadowrocket | [blockAds.srmodule](./Shadowrocket/module/blockAds.srmodule) | 合集中的彩云天气分组：仅拦截 `ad.cyapi.cn`，不拦截活动接口，不修改天气、账户或会员信息 |
+| 中国移动去广告 | Shadowrocket | [blockAds.srmodule](./Shadowrocket/module/blockAds.srmodule) | 开屏接口空响应、广告列表和悬浮窗接口拦截；需要 MITM，可能影响运营活动或功能入口，当前版本未实测 |
 
-其他客户端暂未提供彩云规则，后续适配后再更新列表。
+其他客户端暂未提供这些规则，后续适配后再更新列表。
 
 ## 使用说明
 
 1. 在当前客户端列表中查看对应说明和条目。
 2. 使用对应客户端的模块、插件或规则导入方式；完整配置可能覆盖原有设置，导入前先备份。
-3. 远程引用时，将本项目发布到你自己的仓库，再复制文件的 **Raw** 原始链接。不要直接使用上游链接，否则加载的不是本项目整理后的内容。
+3. 远程引用使用本项目的 [Raw 模块链接](https://raw.githubusercontent.com/gufeng0/proxy_rules/main/Shadowrocket/module/blockAds.srmodule)。不要直接使用上游链接，否则加载的不是本项目整理后的内容；本地修改需推送后才会出现在远程链接中。
 4. 导入后检查规则冲突，通过客户端请求记录确认命中，并验证应用主要功能正常。
 
-私有仓库的 Raw 链接需要访问权限，客户端可能无法直接下载；可改用本地文件导入，不要将访问凭据写入模块地址或规则文件。
+中国移动规则需要开启 HTTPS 解密（MITM），并安装、信任 Shadowrocket 证书。模块只追加 `client.app.coc.10086.cn`、`app.10086.cn` 两个解密域名，不包含证书或私钥；彩云规则本身不需要解密。
 
 具体导入操作以客户端当前版本为准。去广告效果可能随应用和接口更新变化，不保证所有条目长期有效或覆盖全部广告。
 
@@ -60,6 +61,7 @@
 
 - 原项目：[fmz200/wool_scripts](https://github.com/fmz200/wool_scripts)。
 - 当前彩云广告域名规则来源：原项目 `Shadowrocket/module/blockAds.srmodule`；原作者奶思。
+- 中国移动规则来源：原项目 [ChinaMobile.srmodule](https://github.com/fmz200/wool_scripts/blob/main/Shadowrocket/module/split/partZ/ChinaMobile.srmodule)；原作者奶思。只收集开屏、广告列表及悬浮窗规则，不包含其 IP 拦截。
 - 本项目为精简修改版；保留作者归属，沿用 [GNU GPL v3](./LICENSE)。后续收集内容需确认其许可及署名要求。
 
 本项目使用全新 Git 历史，仅提交当前整理后的内容，不包含旧项目的提交历史。
