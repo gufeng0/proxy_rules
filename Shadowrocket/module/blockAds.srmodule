@@ -1,34 +1,25 @@
 #!name=去广告合集
-#!desc=按应用分组维护去广告规则；包含彩云天气与中国移动，中国移动部分使用 URL 重写、Map Local 和 MITM（需 HTTPS 解密）。
+#!desc=彩云天气、中国移动去广告
 #!author=奶思（原规则）
 #!category=去广告
 
 [Rule]
 
 # > 彩云天气
-# 来源：https://github.com/fmz200/wool_scripts（原作者：奶思）
-# 仅拦截广告域名，不拦截活动接口，不修改天气或账户信息。
 DOMAIN,ad.cyapi.cn,REJECT
 
 [URL Rewrite]
 
-# > 中国移动（广告列表）
-# 来源：https://github.com/fmz200/wool_scripts/blob/main/Shadowrocket/module/split/partZ/ChinaMobile.srmodule（原作者：奶思，GPL-3.0）
-# 拒绝上游标注的广告列表接口，不做整域阻断；当前 App 版本效果未实测。
+# > 中国移动
 ^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/explorePage\/getAdverList - reject
-
-# > 中国移动（多个悬浮窗广告）
-# 来源同上；同时匹配 client.app.coc.10086.cn 与 app.10086.cn，仅限该接口路径。
 ^https?:\/\/(client\.app\.coc|app)\.10086\.cn\/biz-orange\/DN\/emotionMarket - reject
 
 [Map Local]
 
-# > 中国移动（开屏广告：启动初始化接口）
-# 来源同上；将该接口响应替换为一个空格，沿用上游开屏拦截方式。
-# 注意：初始化接口及运营活动、功能入口可能受影响，具体影响需设备验证。
+# > 中国移动
 ^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/init\/startInit data-type=text data=" "
 
 [MITM]
 
-# 仅解密中国移动的两个域名；彩云天气为域名拦截，无需解密。
+# > 中国移动
 hostname = %APPEND% client.app.coc.10086.cn, app.10086.cn
