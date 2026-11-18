@@ -1,0 +1,36 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+.fseventsd
+.TemporaryItems
+
+# 本地编辑器与代理配置
+.idea/
+.vscode/
+.codex/
+.history/
+*.iml
+*.ipr
+*.iws
+/shelf/
+/httpRequests/
+/codestream.xml
+/workspace.xml
+
+# 敏感信息
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# 临时文件与依赖
+*~
+*.log
+*.tmp
+*.bak
+node_modules/

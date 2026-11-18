@@ -1,0 +1,11 @@
+#!name=去广告合集
+#!desc=按应用分组维护去广告规则；当前仅包含彩云天气广告域名拦截，无需 HTTPS 解密。
+#!author=奶思（原规则）
+#!category=去广告
+
+[Rule]
+
+# > 彩云天气
+# 来源：https://github.com/fmz200/wool_scripts（原作者：奶思）
+# 仅拦截广告域名，不拦截活动接口，不修改天气或账户信息。
+DOMAIN,ad.cyapi.cn,REJECT
