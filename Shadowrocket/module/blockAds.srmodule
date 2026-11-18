@@ -1,5 +1,5 @@
 #!name=去广告合集
-#!desc=彩云天气、中国移动去广告
+#!desc=彩云天气去广告
 #!author=奶思（原规则）
 #!category=去广告
 
@@ -7,19 +7,3 @@
 
 # > 彩云天气
 DOMAIN,ad.cyapi.cn,REJECT
-
-[URL Rewrite]
-
-# > 中国移动
-^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/explorePage\/getAdverList - reject
-^https?:\/\/(client\.app\.coc|app)\.10086\.cn\/biz-orange\/DN\/emotionMarket - reject
-
-[Map Local]
-
-# > 中国移动
-^https?:\/\/client\.app\.coc\.10086\.cn\/biz-orange\/DN\/init\/startInit data-type=text data=" "
-
-[MITM]
-
-# > 中国移动
-hostname = %APPEND% client.app.coc.10086.cn, app.10086.cn
